@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph Display</title>
+    <style>
+        #graphCanvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="graphCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawGraph(nodes, edges) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw edges
+            edges.forEach(edge => {
+                const [from, to] = edge;
+                ctx.beginPath();
+                ctx.moveTo(from.x, from.y);
+                ctx.lineTo(to.x, to.y);
+                ctx.stroke();
+            });
+
+            // Draw nodes
+            nodes.forEach(node => {
+                ctx.beginPath();
+                if (node.type === 'topic') {
+                    ctx.rect(node.x - 40, node.y - 20, 80, 40); // Draw topic as rectangle
+                } else {
+                    ctx.arc(node.x, node.y, 20, 0, 2 * Math.PI); // Draw agent as circle
+                }
+                ctx.stroke();
+                ctx.fillText(node.name, node.x - 20, node.y - 30); // Draw node name
+            });
+        }
+
+        // Example data
+        const nodes = [
+            { name: 'A', x: 100, y: 100, type: 'agent' },
+            { name: 'B', x: 300, y: 100, type: 'agent' },
+            { name: 'T1', x: 200, y: 300, type: 'topic' }
+        ];
+
+        const edges = [
+            [{ x: 100, y: 100 }, { x: 200, y: 300 }],
+            [{ x: 300, y: 100 }, { x: 200, y: 300 }]
+        ];
+
+        drawGraph(nodes, edges);
+    </script>
+</body>
+</html>
