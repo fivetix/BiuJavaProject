@@ -4,12 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, button {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 1em;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Upload Configuration File</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="configFile">
-        <button type="submit">Upload</button>
+    <form action="/upload" method="post" enctype="multipart/form-data" target="graphFrame">
+        <label for="configFile">Choose configuration file:</label>
+        <input type="file" name="configFile" id="configFile">
+        <button type="submit">Deploy</button>
+    </form>
+
+    <h1>Submit Topic and Message</h1>
+    <form action="/publish" method="get" target="tableFrame">
+        <label for="topic">Topic:</label>
+        <input type="text" name="topic" id="topic" required>
+        <label for="message">Message:</label>
+        <input type="text" name="message" id="message" required>
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
